@@ -12,8 +12,8 @@ class UserLevel(models.TextChoices):
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_("Email Address"), max_length=255, unique=True, null=True)
-    phone_number = models.CharField(max_length=10, unique=True, null=True)
+    email = models.EmailField(_("Email Address"), max_length=255, unique=True, null=True, blank=True)
+    phone_number = models.CharField(max_length=10, unique=True, null=True, blank=True)
     level = models.CharField(max_length=5, default="USER", choices=UserLevel.choices)
 
     USERNAME_FIELD = "email"
