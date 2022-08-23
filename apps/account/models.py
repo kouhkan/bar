@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 
 from apps.account.manager import UserManager
@@ -11,7 +11,7 @@ class UserLevel(models.TextChoices):
     USER = "USER"
 
 
-class User(BaseModel, AbstractBaseUser):
+class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("Email Address"), max_length=255, unique=True, null=True)
     phone_number = models.CharField(max_length=10, unique=True, null=True)
     level = models.CharField(max_length=5, default="USER", choices=UserLevel.choices)
@@ -23,3 +23,17 @@ class User(BaseModel, AbstractBaseUser):
 
     def __str__(self):
         return f"{self.id}"
+
+    @property
+    def is_staff(self):
+        return self.level == UserLevel.ADMIN.name
+
+    @property
+    def is_superuser(self):
+        return self.level == UserLevel.ADMIN.name
+
+    def has_perm(self, perm, obj=None):
+        return self.is_staff
+
+    def has_module_perms(self, app_label):
+        return self.is_staff
