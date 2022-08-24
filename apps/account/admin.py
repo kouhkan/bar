@@ -23,7 +23,7 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ("created_at", "level")
     list_editable = ("level", )
     list_per_page = 25
-    
+    actions = (change_to_user, change_to_admin)
     fieldsets = (
         (None, {"fields": ("email", "phone_number")}),
         ("Permissions", {"fields": ("level",)}),
