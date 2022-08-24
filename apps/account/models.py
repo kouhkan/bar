@@ -15,6 +15,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("Email Address"), max_length=255, unique=True, null=True, blank=True)
     phone_number = models.CharField(max_length=10, unique=True, null=True, blank=True)
     level = models.CharField(max_length=5, default="USER", choices=UserLevel.choices)
+    password = models.CharField(_('password'), max_length=128, blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
