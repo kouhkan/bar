@@ -22,7 +22,7 @@ urlpatterns = [
         "api/v1/",
         include(
             [
-                path("account/", include("account.urls", namespace="account")),
+                path("account/", include("account.v1.urls", namespace="account")),
             ]
         )
     )
