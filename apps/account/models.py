@@ -38,3 +38,6 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return self.is_staff
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
