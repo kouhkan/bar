@@ -32,7 +32,6 @@ class TokenSerializerView(APIView):
         serializer = self.serializer(data=request.data)
 
         if serializer.is_valid(raise_exception=True):
-            print(serializer.data)
             if result := serializer.create(validated_data=serializer.data):
                 if result:
 
