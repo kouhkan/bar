@@ -1,3 +1,4 @@
+import sys
 from datetime import timedelta
 from random import randint
 
@@ -21,7 +22,7 @@ def generate_token():
 
 
 def set_user_token(identity: str):
-    if settings.DEBUG:
+    if settings.DEBUG or "test" in sys.argv[1:2] == ["test"]:
         token = "000000"
     else:
         token = generate_token()
