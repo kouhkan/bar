@@ -7,5 +7,6 @@ app_name = "account"
 
 urlpatterns = [
     path("list", views.ListUsers.as_view(), name="list_users"),
-    path("register", views.CreateUser.as_view(), name="create_user"),
+    path("register", views.RegisterUserView.as_view(), name="register_user"),
+    path("token", views.TokenSerializerView.as_view(), name="token_user"),
 ]
