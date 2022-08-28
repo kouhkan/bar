@@ -3,12 +3,10 @@ from rest_framework import serializers, status
 from rest_framework.exceptions import ValidationError
 
 from apps.account.utils.redis_auth_handler import (
-    get_user_wait_time_token,
-    set_user_token,
     remove_token_user,
     check_user_token
-
 )
+from .tasks import create_user_token
 
 
 class RegisterSerializer(serializers.Serializer):
@@ -28,13 +26,7 @@ class RegisterSerializer(serializers.Serializer):
             if validated_data.get("phoneNumber", None) else \
             validated_data.get("email")
 
-        if wait_time := get_user_wait_time_token(identity):
-            raise ValidationError(
-                detail=f"{wait_time} second(s) left to got new token.",
-                code=status.HTTP_429_TOO_MANY_REQUESTS,
-            )
-
-        return set_user_token(identity=identity)
+        create_user_token(identity)
 
     def update(self, instance, validated_data):
         pass
