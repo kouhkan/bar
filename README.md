@@ -6,6 +6,8 @@ Bar is a service for transport a little things between income and outcome passen
 
 
 TODO:
+- [x] add celery
+- [x] custom authentication
 - [ ] add more test
 - [ ] implement unit testing
 - [ ] applicant (users' requests)
