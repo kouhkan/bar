@@ -1,16 +1,18 @@
 import json
 
+from apps.account.v1.serializers import (
+    RegisterSerializer,
+    TokenSerializer,
+    UserSerializer,
+)
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
 
-from apps.account.v1.serializers import (
-    RegisterSerializer,
-    TokenSerializer,
-    UserSerializer
-)
+from .view_logics import create_user
 
 
 class RegisterUserView(APIView):
@@ -34,23 +36,20 @@ class TokenSerializerView(APIView):
         if serializer.is_valid(raise_exception=True):
             if result := serializer.create(validated_data=serializer.data):
                 if result:
-
-                    user = get_user_model().objects.filter(
-                        Q(phone_number=serializer.data.get("phoneNumber", None)) |
-                        Q(email=serializer.data.get("email", None))
-                    ).first()
-
-                    if not user:
-                        user = self.model()
-                        if phone_number := serializer.data.get("phoneNumber", None):
-                            user.phone_number = phone_number
-                        if email := serializer.data.get("email", None):
-                            user.email = email
-                        user.save()
-                        return Response({"phoneNumber": user.phone_number, "email": user.email, "level": user.level}, status=status.HTTP_201_CREATED)
-                    return Response({"phoneNumber": user.phone_number, "email": user.email, "level": user.level}, status=status.HTTP_200_OK)
-                return Response({"msg": "Code was wrong"}, status=status.HTTP_400_BAD_REQUEST)
-            return Response({"msg": "Token does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+                    user = create_user(serializer)
+                    refresh = RefreshToken.for_user(user)
+                    accesss = refresh.access_token
+                    return Response(
+                        {"access": str(accesss), "refresh": str(refresh)}
+                    )
+                return Response(
+                    {"msg": "Code was wrong"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            return Response(
+                {"msg": "Token does not exist."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
 
 class ListUsers(APIView):
