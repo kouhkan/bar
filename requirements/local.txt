@@ -1,0 +1,7 @@
+-r base.txt
+poetry==1.2.0
+poetry-core==1.1.0
+poetry-plugin-export==1.0.6
+virtualenv==20.16.4
+flake8==5.0.4
+black==22.8.0
