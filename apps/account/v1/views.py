@@ -38,9 +38,9 @@ class TokenSerializerView(APIView):
                 if result:
                     user = create_user(serializer)
                     refresh = RefreshToken.for_user(user)
-                    accesss = refresh.access_token
+                    access = refresh.access_token
                     return Response(
-                        {"access": str(accesss), "refresh": str(refresh)}
+                        {"access": str(access), "refresh": str(refresh)}
                     )
                 return Response(
                     {"msg": "Code was wrong"},
