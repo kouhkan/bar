@@ -36,9 +36,18 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-LOCAL_APPS = ["account", "applicant"]
-THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt"]
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt"
+]
+
+LOCAL_APPS = [
+    "account",
+    "applicant",
+
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # Auth Model
 AUTH_USER_MODEL = "account.User"
