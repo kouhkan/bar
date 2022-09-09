@@ -2,9 +2,9 @@ from typing import Dict, Sequence
 
 from django.contrib import admin
 
-from .models import DeletedApplicant
-from .models import Applicant
-from .actions import recovery
+from apps.applicant.models import DeletedApplicant
+from apps.applicant.models import Applicant
+from apps.applicant.actions import recovery
 
 
 @admin.register(Applicant)
