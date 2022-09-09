@@ -23,6 +23,7 @@ urlpatterns = [
         include(
             [
                 path("account/", include("account.v1.urls", namespace="account")),
+                path("applicant/", include("applicant.v1.urls", namespace="applicant")),
             ]
         )
     )
