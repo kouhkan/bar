@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Manager
 
-from utils.db.base import BaseModel
-from utils.db.soft_delete import SoftDelete
+from utils.db import BaseModel
+from utils.db import SoftDelete
 
 User = get_user_model()
 
@@ -13,7 +13,7 @@ class ApplicantStatus(models.TextChoices):
     ACCEPTED = "ACCEPTED"
 
 
-class Applicant(BaseModel, SoftDelete):
+class Applicant(SoftDelete, BaseModel):
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="applicants"
     )
