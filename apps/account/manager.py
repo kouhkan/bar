@@ -22,9 +22,8 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-    def create_superuser(self, email: str, password: str, **kwargs):
-        email = self.normalize_email(email)
-        user = self.model(email=email, **kwargs)
+    def create_superuser(self,  password: str, **kwargs):
+        user = self.model(**kwargs)
         user.set_password(password)
         user.level = "ADMIN"
         user.save()
