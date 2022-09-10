@@ -11,11 +11,9 @@ def create_user(serializer) -> User:
     ).first()
 
     if not user:
-        user = User
-        if phone_number := serializer.data.get("phoneNumber", None):
-            user.phone_number = phone_number
-        if email := serializer.data.get("email", None):
-            user.email = email
-        user.save()
+        user = User.objects.create(
+            phone_number=serializer.data.get("phoneNumber"),
+            email=serializer.data.get("email")
+        )
 
     return user
