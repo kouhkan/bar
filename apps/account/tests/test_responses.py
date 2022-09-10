@@ -28,7 +28,7 @@ class AccountAppTests(APITestCase):
         data = {"email": "test@gmail.com", "token": "000000"}
         response = self.client.put(url, data=data)
 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsInstance(response.data, dict)
 
         self.client.post(reverse("account:register_user"), {"email": "test@gmail.com"})
