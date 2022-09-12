@@ -4,7 +4,6 @@ from django.contrib import admin
 
 from apps.applicant.models import DeletedApplicant
 from apps.applicant.models import Applicant
-from apps.applicant.actions import recovery
 
 
 @admin.register(Applicant)
@@ -25,6 +24,10 @@ class ApplicantAdmin(admin.ModelAdmin):
 class DeletedApplicantAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return DeletedApplicant.deleted.filter(is_deleted=True)
+
+    @admin.action(description="Recover deleted item")
+    def recovery(self, request, queryset):
+        queryset.update(is_deleted=False, deleted_at=None)
 
     actions = (recovery,)
     list_display: Sequence[str] = ("id", "user_id", "title", "deleted_at", "status")

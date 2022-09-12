@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Manager
+from django.db.transaction import atomic
 
 from utils.db import BaseModel
 from utils.db import SoftDelete
@@ -39,3 +40,14 @@ class DeletedApplicant(Applicant):
 
     class Meta:
         proxy = True
+
+
+@atomic
+def create_applicant(user_id: User, title: str, description: str, location: str) -> Applicant:
+    applicant = Applicant()
+    applicant.user_id = user_id
+    applicant.title = title
+    applicant.description = description
+    applicant.location = location
+    applicant.save()
+    return applicant

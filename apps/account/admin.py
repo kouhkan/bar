@@ -5,23 +5,21 @@ from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
-@admin.action(description="Covert to ADMIN level")
-def change_to_admin(modeladmin, request, queryset):
-    queryset.update(level="ADMIN")
-
-
-@admin.action(description="Covert to USER level")
-def change_to_user(modeladmin, request, queryset):
-    queryset.update(level="USER")
-
-
 class CustomUserAdmin(UserAdmin):
+    @admin.action(description="Covert to ADMIN level")
+    def change_to_admin(modeladmin, request, queryset):
+        queryset.update(level="ADMIN")
+
+    @admin.action(description="Covert to USER level")
+    def change_to_user(modeladmin, request, queryset):
+        queryset.update(level="USER")
+
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
     model = get_user_model()
     list_display = ("id", "email", "phone_number", "level")
     list_filter = ("created_at", "level")
-    list_editable = ("level", )
+    list_editable = ("level",)
     list_per_page = 25
     actions = (change_to_user, change_to_admin)
     fieldsets = (

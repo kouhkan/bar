@@ -1,11 +1,34 @@
 import graphene
 from django.contrib.auth import get_user_model
+from graphene_django import DjangoObjectType
 
 from apps.applicant.models import Applicant
-from .schema_inputs import ApplicantDeleteInput
-from .schema_inputs import ApplicantInput
-from .schema_inputs import ApplicantUpdateInput
-from .schema_types import ApplicantType
+
+
+class ApplicantType(DjangoObjectType):
+    class Meta:
+        model = Applicant
+        fields = ("id", "user_id", "title", "description", "location", "status", "created_at")
+
+
+class ApplicantInput(graphene.InputObjectType):
+    id = graphene.Int(required=False)
+    user_id = graphene.Int()
+    title = graphene.String()
+    description = graphene.String()
+    location = graphene.String()
+
+
+class ApplicantUpdateInput(graphene.InputObjectType):
+    id = graphene.Int(required=True)
+    user_id = graphene.Int(required=False)
+    title = graphene.String(required=False)
+    description = graphene.String(required=False)
+    location = graphene.String(required=False)
+
+
+class ApplicantDeleteInput(graphene.InputObjectType):
+    id = graphene.Int(required=True)
 
 
 class Query(graphene.ObjectType):

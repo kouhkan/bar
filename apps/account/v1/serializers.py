@@ -2,7 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers, status
 from rest_framework.exceptions import ValidationError
 
-from .token_logics import create_token_for_user, verify_user_token
+from apps.account.models import create_token_for_user
+from apps.account.models import verify_user_token
 
 
 class RegisterSerializer(serializers.Serializer):
