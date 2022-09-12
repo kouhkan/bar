@@ -18,7 +18,6 @@ class Applicant(SoftDelete, BaseModel):
         User, on_delete=models.CASCADE, related_name="applicants"
     )
     title = models.CharField(max_length=255, null=False, unique=False)
-    slug = models.SlugField(max_length=255, null=False, unique=True)
     description = models.TextField()
     location = models.TextField()
     status = models.CharField(

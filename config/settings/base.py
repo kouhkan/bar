@@ -38,7 +38,8 @@ DJANGO_APPS = [
 ]
 THIRD_PARTY_APPS = [
     "rest_framework",
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    "graphene_django"
 ]
 
 LOCAL_APPS = [
@@ -130,4 +131,8 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+}
+
+GRAPHENE = {
+    "SCHEMA": "apps.applicant.v1.schema.schema"
 }

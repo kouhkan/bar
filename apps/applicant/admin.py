@@ -19,7 +19,6 @@ class ApplicantAdmin(admin.ModelAdmin):
         "user_id",
         "location",
     )
-    prepopulated_fields: Dict[str, Sequence[str]] = {"slug": ("title",)}
 
 
 @admin.register(DeletedApplicant)
@@ -38,4 +37,3 @@ class DeletedApplicantAdmin(admin.ModelAdmin):
         "user_id",
         "location",
     )
-    prepopulated_fields: Dict[str, Sequence[str]] = {"slug": ("title",)}
