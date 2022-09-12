@@ -10,6 +10,8 @@ TODO:
 - [x] custom authentication
 - [ ] add more test
 - [ ] implement unit testing
-- [ ] applicant (users' requests)
-- [ ] split up logic section from serializers/tasks/views
+- [x] applicant (users' requests)
+- [x] split up logic section from serializers/tasks/views
+- [x] add GraphQL
+- [ ] Dockerize project
 
