@@ -6,10 +6,6 @@ from .base import *
 DEBUG = True
 ALLOWED_HOSTS = []
 
-REDIS_HOST = "localhost"
-REDIS_DB = 0
-REDIS_PORT = 6379
-
 # CELERY CONFIGURATIONS
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 CELERY_RESULT_BACKEND = "rpc://"
@@ -44,10 +40,3 @@ SIMPLE_JWT = {
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}

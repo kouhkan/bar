@@ -136,3 +136,14 @@ REST_FRAMEWORK = {
 GRAPHENE = {
     "SCHEMA": "apps.applicant.v1.schema.schema"
 }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+REDIS_HOST = os.environ["REDIS_HOST"]
+REDIS_DB = os.environ["REDIS_DB"]
+REDIS_PORT = os.environ["REDIS_PORT"]
