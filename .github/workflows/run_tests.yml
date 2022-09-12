@@ -5,6 +5,8 @@ jobs:
     name: Install requirements and execute tests
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Redis
+        uses: zhulik/redis-action@1.1.0
       - name: Update
         run: sudo apt update
       - name: Check out repository code
