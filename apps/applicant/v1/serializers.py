@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.applicant.models import Applicant
-from apps.applicant.v1.applicant_logics import create_applicant
+from apps.applicant.models import create_applicant
 
 
 class ApplicantSerializer(serializers.ModelSerializer):
