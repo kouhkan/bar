@@ -7,7 +7,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # CELERY CONFIGURATIONS
-CELERY_BROKER_URL = "amqp://guest:guest@localhost"
+CELERY_BROKER_URL = "amqp://rabbitmq"
 CELERY_RESULT_BACKEND = "rpc://"
 
 # SIMPLE JWT CONFIGS
@@ -40,3 +40,5 @@ SIMPLE_JWT = {
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+

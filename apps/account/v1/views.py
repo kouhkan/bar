@@ -1,18 +1,13 @@
-import json
-
-from apps.account.v1.serializers import (
-    RegisterSerializer,
-    TokenSerializer,
-    UserSerializer,
-)
 from django.contrib.auth import get_user_model
-from django.db.models import Q
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .view_logics import create_user
+from apps.account.models import create_user
+from apps.account.v1.serializers import RegisterSerializer
+from apps.account.v1.serializers import TokenSerializer
+from apps.account.v1.serializers import UserSerializer
 
 
 class RegisterUserView(APIView):

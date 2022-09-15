@@ -39,7 +39,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
-    "graphene_django"
+    # "graphene_django"
 ]
 
 LOCAL_APPS = [
@@ -118,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 MEDIA_ROOT = BASE_DIR / "media"
-STATIC_ROOT = BASE_DIR / "static_root"
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_FILES = [BASE_DIR / "static"]
 
 # Default primary key field type
@@ -137,13 +137,17 @@ GRAPHENE = {
     "SCHEMA": "apps.applicant.v1.schema.schema"
 }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
 REDIS_HOST = os.environ["REDIS_HOST"]
 REDIS_DB = os.environ["REDIS_DB"]
 REDIS_PORT = os.environ["REDIS_PORT"]
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "bar_db",
+        "USER": "postgres",
+        "PASSWORD": "pass",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
